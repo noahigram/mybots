@@ -19,6 +19,7 @@ z = 0.5
 # Create 25 towers
 for ii in range(5):
     for jj in range(5):
+        z = 0.5
         for kk in range(10):
             pyrosim.Send_Cube(
                 name="Box", pos=[x+ii, y+jj, z], size=[l*(0.9**kk), w*(0.9**kk), h*(0.9**kk)])
