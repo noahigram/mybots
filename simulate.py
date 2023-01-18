@@ -11,10 +11,6 @@ simulation.Run()
 # import constants as c
 
 
-# backLegSensorValues = np.zeros(c.simLength)
-# frontLegSensorValues = np.zeros(c.simLength)
-
-
 # # Store sine values in the range (-1 to 1)
 # x = np.linspace(0, 2*np.pi, c.simLength)
 

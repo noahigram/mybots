@@ -16,15 +16,15 @@ class SIMULATION:
         self.world = WORLD()
         self.robot = ROBOT()
         pyrosim.Prepare_To_Simulate(self.robot.robotID)
+        self.step = 0
 
     def Run(self):
-        for ii in range(c.simLength):
-            print(ii)
+        self.step = 0
+        while self.step < c.simLength:
+            print(self.step)
             p.stepSimulation()
-    #     backLegSensorValues[ii] = pyrosim.Get_Touch_Sensor_Value_For_Link(
-    #         "BackLeg")
-    #     frontLegSensorValues[ii] = pyrosim.Get_Touch_Sensor_Value_For_Link(
-    #         "FrontLeg")
+            self.robot.Sense(self.step)
+            self.step += 1
 
     #     pyrosim.Set_Motor_For_Joint(
     #         bodyIndex=robotID,
