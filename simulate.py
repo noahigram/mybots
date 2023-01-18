@@ -14,9 +14,7 @@ simulation.Run()
 # # Store sine values in the range (-1 to 1)
 # x = np.linspace(0, 2*np.pi, c.simLength)
 
-# targetAnglesFront = c.amplitudeFront * \
-#     np.sin(c.frequencyFront*x+c.phaseOffsetFront)
-# targetAnglesBack = c.amplitudeBack*np.sin(c.frequencyBack*x+c.phaseOffsetBack)
+
 # np.save("data/targetAnglesValuesFront.npy", targetAnglesFront)
 # np.save("data/targetAnglesValuesBack.npy", targetAnglesBack)
 
