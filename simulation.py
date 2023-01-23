@@ -21,9 +21,10 @@ class SIMULATION:
     def Run(self):
         self.step = 0
         while self.step < c.simLength:
-            print(self.step)
+            # print(self.step)
             p.stepSimulation()
             self.robot.Sense(self.step)
+            self.robot.Think()
             self.robot.Act(self.robot, self.step)
             self.step += 1
 
