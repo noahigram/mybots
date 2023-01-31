@@ -5,10 +5,12 @@ from motor import MOTOR
 import constants as c
 import numpy as np
 from pyrosim.neuralNetwork import NEURAL_NETWORK
+import os
 
 
 class ROBOT:
-    def __init__(self):
+    def __init__(self, solutionID):
+        self.solutionID = solutionID
         self.robotID = p.loadURDF("body.urdf")
         self.motors = {}
         self.linkname = ""
@@ -17,7 +19,8 @@ class ROBOT:
         pyrosim.Prepare_To_Simulate(self.robotID)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
-        self.nn = NEURAL_NETWORK("brain.nndf")
+        self.nn = NEURAL_NETWORK(f"brain{self.solutionID}.nndf")
+        os.system(f"rm brain{solutionID}.nndf")
 
     def Prepare_To_Sense(self):
         for linkName in pyrosim.linkNamesToIndices:
@@ -44,11 +47,10 @@ class ROBOT:
         self.nn.Update()
         # self.nn.Print()
 
-    def Get_Fitness(self):
+    def Get_Fitness(self, solutionID):
         stateOfLinkZero = p.getLinkState(self.robotID, 0)
         positionOfLinkZero = stateOfLinkZero[0]
         xCoordinateOfLinkZero = positionOfLinkZero[0]
-        f = open("fitness.txt", "w")
+        f = open(f"tmp{solutionID}.txt", "w")
+        os.system(f"mv tmp{solutionID}.txt fitness{solutionID}.txt")
         f.write(str(xCoordinateOfLinkZero))
-
-        exit()

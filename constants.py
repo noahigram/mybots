@@ -1,6 +1,6 @@
 import numpy as np
 
-simLength = 200
+simLength = 400
 sleepInt = 1/60
 
 # Simulation Gravity
@@ -22,3 +22,4 @@ frequencyBack = 40
 phaseOffsetBack = 0
 
 numberOfGenerations = 10
+populationSize = 10
