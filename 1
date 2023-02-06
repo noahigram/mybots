@@ -10,6 +10,22 @@ MotionThreadFunc thread started
 b3Printf: b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
 
 b3Printf: expected a world element, continuing without it.
+Traceback (most recent call last):
+  File "/Users/noahigram/mybots/simulate.py", line 10, in <module>
+    simulation.Run()
+  File "/Users/noahigram/mybots/simulation.py", line 31, in Run
+    self.robot.Sense(self.step)
+  File "/Users/noahigram/mybots/robot.py", line 32, in Sense
+    sensor.Get_Value(t)
+  File "/Users/noahigram/mybots/sensor.py", line 12, in Get_Value
+    self.values[t] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+  File "/Users/noahigram/mybots/pyrosim/pyrosim.py", line 56, in Get_Touch_Sensor_Value_For_Link
+    for pt in pts:
+TypeError: 'NoneType' object is not iterable
+Exception ignored in: <function SIMULATION.__del__ at 0x104689510>
+Traceback (most recent call last):
+  File "/Users/noahigram/mybots/simulation.py", line 42, in __del__
+pybullet.error: Not connected to physics server.
 numActiveThreads = 0
 stopping threads
 destroy semaphore

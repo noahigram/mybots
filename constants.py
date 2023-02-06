@@ -1,6 +1,6 @@
 import numpy as np
 
-simLength = 400
+simLength = 2000
 sleepInt = 1/60
 
 # Simulation Gravity
@@ -21,10 +21,10 @@ amplitudeBack = np.pi/4
 frequencyBack = 40
 phaseOffsetBack = 0
 
-numberOfGenerations = 10
-populationSize = 10
+numberOfGenerations = 15
+populationSize = 18
 
-numSensorNeurons = 9
-numMotorNeurons = 8
+numSensorNeurons = 5
+numMotorNeurons = 4
 
 motorJointRange = 0.5

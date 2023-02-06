@@ -73,8 +73,13 @@ class PARALLEL_HILL_CLIMBER:
 
     def Show_Best(self):
         bestParent = self.parents[0]
+        worstParent = self.parents[0]
         for key in self.parents.keys():
             if self.parents[key].fitness < bestParent.fitness:
                 bestParent = self.parents[key]
 
+            if self.parents[key].fitness > worstParent.fitness:
+                worstParent = self.parents[key]
+
         bestParent.Start_Simulation("GUI")
+        worstParent.Start_Simulation("GUI")
