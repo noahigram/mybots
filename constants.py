@@ -21,8 +21,8 @@ amplitudeBack = np.pi/4
 frequencyBack = 40
 phaseOffsetBack = 0
 
-numberOfGenerations = 15
-populationSize = 18
+numberOfGenerations = 5
+populationSize = 5
 
 numSensorNeurons = 5
 numMotorNeurons = 4
