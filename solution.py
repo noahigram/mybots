@@ -18,12 +18,11 @@ class SOLUTION:
         self.Create_Brain()
 
     def Wait_For_Simulation_To_End(self):
+        fitnessFileName = f"fitness{self.myID}.txt"
+        f = open(fitnessFileName, "r")
 
         while not os.path.exists("fitness" + str(self.myID) + ".txt"):
             time.sleep(0.5)
-
-        fitnessFileName = f"fitness{self.myID}.txt"
-        f = open(fitnessFileName, "r")
 
         self.fitness = float(f.read())
         f.close()
