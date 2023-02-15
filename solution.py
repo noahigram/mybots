@@ -61,30 +61,47 @@ class SOLUTION:
 
        # Create a loop that iterates a random number of times, 1-20
         self.numLinks = random.randint(6, 12)
-        print(self.numLinks)
+
+        # Decide which links will get sensor neurons
+        self.sensorVec = np.random.randint(0, 2, self.numLinks)
+        print(self.sensorVec)
+
         for link in range(0, self.numLinks):
-            print(link)
+            if self.sensorVec[link] == 0:
+                linkCol = '<color rgba = "0 0 1 1"/>'
+                colName = 'Blue'
+            else:
+                linkCol = '<color rgba = "0 1 0 1"/>'
+                colName = 'Green'
+
             if link == 0:
 
                 linkSize = [0.6, 0.6, 0.6]
                 linkPos = [0, 0, 0.5]
-                pyrosim.Send_Cube(name="0", pos=linkPos, size=linkSize)
+
+                pyrosim.Send_Cube(name="0", pos=linkPos, size=linkSize,
+                                  colorString=linkCol, colorName=colName)
 
             else:
                 if link == 1:
-                    jointPos = [linkSize[0]/2, 0, 0.15]
+                    jointPos = [linkSize[0]/2, 0, linkPos[2]/2]
                     pyrosim.Send_Joint(name=str(link-1) + "_" + str(link), parent=str(link-1), child=str(
                         link), type="revolute", position=jointPos, jointAxis="0 0 1")
                 else:
                     jointPos = [linkSize[0], 0, 0]
+                    if random.randint(0, 1) == 0:
+                        axis = "0 0 1"
+                    else:
+                        axis = "0 1 0"
 
                     pyrosim.Send_Joint(name=str(link-1) + "_" + str(link), parent=str(link-1), child=str(
-                        link), type="revolute", position=jointPos, jointAxis="0 0 1")
+                        link), type="revolute", position=jointPos, jointAxis=axis)
 
                 linkSize = [random.uniform(0.2, 0.5), random.uniform(
                     0.2, 0.5), random.uniform(0.2, 0.5)]
                 linkPos = [linkSize[0]/2, 0, 0]
-                pyrosim.Send_Cube(name=str(link), pos=linkPos, size=linkSize)
+                pyrosim.Send_Cube(name=str(
+                    link), pos=linkPos, size=linkSize, colorString=linkCol, colorName=colName)
 
         # Head
         # pyrosim.Send_Cube(name="Head", pos=[0, 0, 0], size=[0.3, 0.2, 0.2])
@@ -102,16 +119,14 @@ class SOLUTION:
             pyrosim.Send_Motor_Neuron(
                 name=str(link)+"_"+str(link+1), jointName=str(link)+"_"+str(link+1))
             self.numMotorNeurons += 1
-            if random.randint(0, 1) == 0:
+        for link in range(0, self.numLinks-1):
+            if self.sensorVec[link] == 1:
                 pyrosim.Send_Sensor_Neuron(
-                    name=link, linkName=str(link))
+                    name=link+self.numMotorNeurons, linkName=str(link))
                 self.numSensorNeurons += 1
 
-        # pyrosim.Send_Sensor_Neuron(name=0, linkName="Torso")
-        # pyrosim.Send_Sensor_Neuron(name=1, linkName="FrontLeftLeg")
-        # pyrosim.Send_Sensor_Neuron(name=2, linkName="FrontRightLeg")
-        # pyrosim.Send_Sensor_Neuron(name=3, linkName="BackLeftLeg")
-        # pyrosim.Send_Sensor_Neuron(name=4, linkName="BackRightLeg")
+        print("Sensor Neurons: " + str(self.numSensorNeurons))
+        print("Motor Neurons: " + str(self.numMotorNeurons))
 
         self.weights = np.random.rand(
             self.numSensorNeurons, self.numMotorNeurons)
@@ -120,7 +135,7 @@ class SOLUTION:
         for currentRow in range(0, self.numSensorNeurons):
             for currentColumn in range(0, self.numMotorNeurons):
                 pyrosim.Send_Synapse(sourceNeuronName=currentRow,
-                                     targetNeuronName=currentColumn, weight=self.weights[currentRow][currentColumn])
+                                     targetNeuronName=currentColumn+self.numSensorNeurons, weight=self.weights[currentRow][currentColumn])
         pyrosim.End()
 
     def Mutate(self):

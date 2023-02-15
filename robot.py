@@ -20,7 +20,7 @@ class ROBOT:
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
         self.nn = NEURAL_NETWORK(f"brain{self.solutionID}.nndf")
-        os.system(f"rm brain{solutionID}.nndf")
+        #os.system(f"rm brain{solutionID}.nndf")
 
     def Prepare_To_Sense(self):
         for linkName in pyrosim.linkNamesToIndices:

@@ -7,7 +7,7 @@ import os
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
-        # os.system("rm brain*.nndf")
+        os.system("rm brain*.nndf")
         #os.system("rm fitness*.txt")
 
         self.parents = {}
@@ -58,7 +58,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Select(self):
         for key in self.children.keys():
-            if self.parents[key].fitness > self.children[key].fitness:
+            if self.parents[key].fitness >= self.children[key].fitness:
                 self.parents[key] = self.children[key]
 
     def Evolve(self):
