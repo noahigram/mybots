@@ -53,8 +53,11 @@ class ROBOT:
         # basePositionAndOrientation = p.getBasePositionAndOrientation(
         #    self.robotID)
         positionOfLinkZero = stateOfLinkZero[0]
+        print(positionOfLinkZero)
         #basePosition = basePositionAndOrientation[0]
         xCoordinateOfLinkZero = positionOfLinkZero[0]
+        print(xCoordinateOfLinkZero)
+
         #xCoordinateOfLinkZero = basePosition[0]
         f = open(f"tmp{solutionID}.txt", "w")
 

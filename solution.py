@@ -19,10 +19,11 @@ class SOLUTION:
 
     def Wait_For_Simulation_To_End(self):
         fitnessFileName = f"fitness{self.myID}.txt"
-        f = open(fitnessFileName, "r")
 
         while not os.path.exists("fitness" + str(self.myID) + ".txt"):
             time.sleep(0.5)
+
+        f = open(fitnessFileName, "r")
 
         self.fitness = float(f.read())
         f.close()
@@ -59,22 +60,31 @@ class SOLUTION:
         # First make the head
 
        # Create a loop that iterates a random number of times, 1-20
-        self.numLinks = random.randint(2, 20)
+        self.numLinks = random.randint(6, 12)
+        print(self.numLinks)
         for link in range(0, self.numLinks):
+            print(link)
             if link == 0:
-                pos = [0, 0, 1]
-                size = [random.uniform(0.2, 0.5), random.uniform(
-                    0.2, 0.5), random.uniform(0.2, 0.5)]
-                pyrosim.Send_Cube(name="0", pos=pos, size=size)
+
+                linkSize = [0.6, 0.6, 0.6]
+                linkPos = [0, 0, 0.5]
+                pyrosim.Send_Cube(name="0", pos=linkPos, size=linkSize)
 
             else:
-                pyrosim.Send_Joint(name=str(link-1) + "_" + str(link), parent=str(link-1), child=str(
-                    link), type="revolute", position=[pos[0]+size[0]/2, 0, 1], jointAxis="0 0 1")
-                size = [random.uniform(0.2, 0.5), random.uniform(
+                if link == 1:
+                    jointPos = [linkSize[0]/2, 0, 0.15]
+                    pyrosim.Send_Joint(name=str(link-1) + "_" + str(link), parent=str(link-1), child=str(
+                        link), type="revolute", position=jointPos, jointAxis="0 0 1")
+                else:
+                    jointPos = [linkSize[0], 0, 0]
+
+                    pyrosim.Send_Joint(name=str(link-1) + "_" + str(link), parent=str(link-1), child=str(
+                        link), type="revolute", position=jointPos, jointAxis="0 0 1")
+
+                linkSize = [random.uniform(0.2, 0.5), random.uniform(
                     0.2, 0.5), random.uniform(0.2, 0.5)]
-                pos = [pos[0]+size[0]/2, 0, 1]
-                pyrosim.Send_Cube(name=str(link), pos=pos, size=size)
-            print(link)
+                linkPos = [linkSize[0]/2, 0, 0]
+                pyrosim.Send_Cube(name=str(link), pos=linkPos, size=linkSize)
 
         # Head
         # pyrosim.Send_Cube(name="Head", pos=[0, 0, 0], size=[0.3, 0.2, 0.2])
@@ -114,10 +124,11 @@ class SOLUTION:
         pyrosim.End()
 
     def Mutate(self):
-        randomRow = random.randint(0, self.numSensorNeurons-1)
-        randomColumn = random.randint(0, self.numMotorNeurons-1)
+        if self.numMotorNeurons != 0 & self.numSensorNeurons != 0:
+            randomRow = random.randint(0, self.numSensorNeurons-1)
+            randomColumn = random.randint(0, self.numMotorNeurons-1)
 
-        self.weights[randomRow, randomColumn] = random.random() * 2 - 1
+            self.weights[randomRow, randomColumn] = random.random() * 2 - 1
 
     def Set_ID(self, ID):
         self.myID = ID
