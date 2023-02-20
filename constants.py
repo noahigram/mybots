@@ -20,3 +20,5 @@ phaseOffsetFront = np.pi/3
 amplitudeBack = np.pi/4
 frequencyBack = 40
 phaseOffsetBack = 0
+
+numLinks = np.random.randint(6, 12)
