@@ -35,7 +35,7 @@ class JOINT:
         f.write('   <origin rpy="0 0 0" xyz="' + originString + '" />\n')
 
         Save_Whitespace(self.depth, f)
-        f.write('   <axis xyz="0 1 0"/>\n')
+        f.write('   <axis xyz="' + jointAxis + '"/>\n')
 
         Save_Whitespace(self.depth, f)
         f.write(

@@ -1,6 +1,6 @@
 import numpy as np
 
-simLength = 100
+simLength = 1000
 sleepInt = 1/60
 
 # Simulation Gravity
@@ -22,3 +22,4 @@ frequencyBack = 40
 phaseOffsetBack = 0
 
 numLinks = np.random.randint(6, 12)
+sensorVec = np.random.randint(0, 2, numLinks)
