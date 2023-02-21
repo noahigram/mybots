@@ -1,7 +1,7 @@
 # Ludobots Assignment 7
 By Noah Igram
 
-This repo contains the code used for assignment 7. The goal of this assignment was to generate random bodies which take up 3 dimensional space in the simulation. The most important parts of the code for this project are summarized below. 
+This repo contains the code used for assignment 7. The goal of this assignment was to generate random bodies which take up 3 dimensional space in the simulation. The most important parts of the code for this project are summarized below. Starter code for this gitHub repo was provided by the Ludobots MOOC on reddit. This MOOC can be found in the r/ludobots subreddit of Reddit.com.
 
 
 ## Generate.py
