@@ -20,6 +20,11 @@ def Generate_Body():
     sensorVec = np.random.randint(0, 2, numLinks)
     lastFace = 1
 
+    # Create lists for storing Link and Joint positions (absolute) and link sizes
+    absLinkPos = []
+    absJointPos = []
+    linkSizes = []
+
     for link in range(0, numLinks):
         if sensorVec[link] == 0:
             linkCol = '<color rgba = "0 0 1 1"/>'
@@ -30,22 +35,27 @@ def Generate_Body():
 
         if link == 0:
 
-            linkSize = [0.4, 0.4, 0.4]
+            linkSizes.append([0.4, 0.4, 0.4])
             linkPos = [0, 0, 0.5]
+            absLinkPos = linkPos
 
-            pyrosim.Send_Cube(name="0", pos=linkPos, size=linkSize,
+            pyrosim.Send_Cube(name="0", pos=linkPos, size=linkSizes[0],
                               colorString=linkCol, colorName=colName)
 
         else:
             if link == 1:
-                jointPos = [linkSize[0]/2, 0, linkPos[2]/2]
+                jointPos = [linkSizes[0][0]/2, 0, linkPos[2]/2]
+                absJointPos = jointPos
                 pyrosim.Send_Joint(name=str(link-1) + "_" + str(link), parent=str(link-1), child=str(
                     link), type="revolute", position=jointPos, jointAxis="0 0 1")
-                linkSize = [rand.uniform(0.2, 0.5), rand.uniform(
-                    0.2, 0.5), rand.uniform(0.2, 0.5)]
-                linkPos = [linkSize[0]/2, 0, 0]
+                linkSizes.append([rand.uniform(0.2, 0.5), rand.uniform(
+                    0.2, 0.5), rand.uniform(0.2, 0.5)])
+                linkPos = [linkSizes[0][0]/2, 0, 0]
                 pyrosim.Send_Cube(name=str(
-                    link), pos=linkPos, size=linkSize, colorString=linkCol, colorName=colName)
+                    link), pos=linkPos, size=linkSizes[1], colorString=linkCol, colorName=colName)
+                # Update current absolute position of link
+                absLinkPos = [linkPos[0]+absLinkPos[0],
+                              linkPos[1]+absLinkPos[1], linkPos[2]+linkPos[2]]
             else:
 
                 # Randomly choose joint axis
@@ -58,9 +68,10 @@ def Generate_Body():
                     axis = "1 0 0"
 
                 # randomly generate next link's size
-                lastLinkSize = linkSize
-                linkSize = [rand.uniform(0.2, 0.5), rand.uniform(
-                    0.2, 0.5), rand.uniform(0.2, 0.5)]
+                lastLinkSize = linkSizes[link-1]
+                linkSizes.append([rand.uniform(0.2, 0.6), rand.uniform(
+                    0.2, 0.5), rand.uniform(0.2, 0.4)])
+                currentLinkSize = linkSizes[link]
 
                 # Choose joint position as a random face of the last link
 
@@ -68,30 +79,53 @@ def Generate_Body():
                 while faceNum == lastFace:
                     faceNum = rand.randint(0, 5)
 
-                if faceNum == 0 and lastFace != 0:  # Add joint and link in positive x direction
-                    jointPos = [lastLinkSize[0], 0, 0]
-                    linkPos = [linkSize[0]/2, 0, 0]
-                if faceNum == 1 and lastFace != 1:  # Add joint and link in negative x direction
-                    jointPos = [-lastLinkSize[0], 0, 0]
-                    linkPos = [-linkSize[0]/2, 0, 0]
-                if faceNum == 2 and lastFace != 2:  # Add joint and link in positive y direction
-                    jointPos = [0, lastLinkSize[1], 0]
-                    linkPos = [0, linkSize[1]/2, 0]
-                if faceNum == 3 and lastFace != 3:  # Add joint and link in negative y direction
-                    jointPos = [0, -lastLinkSize[1], 0]
-                    linkPos = [0, -linkSize[1]/2, 0]
-                if faceNum == 4 and lastFace != 4:  # Add joint and link in positive z direction
-                    jointPos = [0, 0, lastLinkSize[2]]
-                    linkPos = [0, 0, linkSize[2]/2]
-                if faceNum == 5 and lastFace != 5:  # Add joint and link in negative z direction
-                    jointPos = [0, 0, -lastLinkSize[2]]
-                    linkPos = [0, 0, -linkSize[2]/2]
+                # Need distance from center of link to last joint
+                dCenter = [absLinkPos[0] - absJointPos[0], absLinkPos[1] -
+                           absJointPos[1], absLinkPos[2] - absJointPos[2]]
+
+                if faceNum == 0 and lastFace != 1:  # Add joint and link in positive x direction
+
+                    jointPos = [lastLinkSize[0]/2 +
+                                dCenter[0], dCenter[1], dCenter[2]]
+                    linkPos = [currentLinkSize[0]/2, 0, 0]
+                    absJointPos = [absJointPos[0]+jointPos[0],
+                                   absJointPos[1]+jointPos[1], absJointPos[2]+jointPos[2]]
+                if faceNum == 1 and lastFace != 0:  # Add joint and link in negative x direction
+                    jointPos = [-lastLinkSize[0]/2 +
+                                dCenter[0], dCenter[1], dCenter[2]]
+                    linkPos = [-currentLinkSize[0]/2, 0, 0]
+                    absJointPos = [absJointPos[0]+jointPos[0],
+                                   absJointPos[1]+jointPos[1], absJointPos[2]+jointPos[2]]
+                if faceNum == 2 and lastFace != 3:  # Add joint and link in positive y direction
+                    jointPos = [dCenter[0], lastLinkSize[1]/2 +
+                                dCenter[1], dCenter[2]]
+                    linkPos = [0, currentLinkSize[1]/2, 0]
+                    absJointPos = [absJointPos[0]+jointPos[0],
+                                   absJointPos[1]+jointPos[1], absJointPos[2]+jointPos[2]]
+                if faceNum == 3 and lastFace != 2:  # Add joint and link in negative y direction
+                    jointPos = [dCenter[0], -
+                                lastLinkSize[1]/2+dCenter[1], dCenter[1]]
+                    linkPos = [0, -currentLinkSize[1]/2, 0]
+                    absJointPos = [absJointPos[0]+jointPos[0],
+                                   absJointPos[1]+jointPos[1], absJointPos[2]+jointPos[2]]
+                if faceNum == 4 and lastFace != 5:  # Add joint and link in positive z direction
+                    jointPos = [dCenter[0], dCenter[1],
+                                lastLinkSize[2]/2+dCenter[2]]
+                    linkPos = [0, 0, currentLinkSize[2]/2]
+                    absJointPos = [absJointPos[0]+jointPos[0],
+                                   absJointPos[1]+jointPos[1], absJointPos[2]+jointPos[2]]
+                if faceNum == 5 and lastFace != 4:  # Add joint and link in negative z direction
+                    jointPos = [dCenter[0], dCenter[1], -
+                                lastLinkSize[2]/2+dCenter[2]]
+                    linkPos = [0, 0, -currentLinkSize[2]/2]
+                    absJointPos = [absJointPos[0]+jointPos[0],
+                                   absJointPos[1]+jointPos[1], absJointPos[2]+jointPos[2]]
                 lastFace = faceNum
 
                 pyrosim.Send_Joint(name=str(link-1) + "_" + str(link), parent=str(link-1), child=str(
                     link), type="revolute", position=jointPos, jointAxis=axis)
                 pyrosim.Send_Cube(name=str(
-                    link), pos=linkPos, size=linkSize, colorString=linkCol, colorName=colName)
+                    link), pos=linkPos, size=currentLinkSize, colorString=linkCol, colorName=colName)
 
     pyrosim.End()
 
@@ -111,13 +145,6 @@ def Generate_Brain():
                 name=link+numMotorNeurons, linkName=str(link))
             numSensorNeurons += 1
 
-    # print("Sensor Neurons: " + str(numSensorNeurons))
-    # print("Motor Neurons: " + str(numMotorNeurons))
-
-    # weights = np.random.rand(
-    #     numSensorNeurons, numMotorNeurons)
-    # weights = weights * 2 - 1
-
     for currentRow in range(0, numSensorNeurons):
         for currentColumn in range(0, numMotorNeurons):
             pyrosim.Send_Synapse(sourceNeuronName=currentRow,
@@ -127,4 +154,6 @@ def Generate_Brain():
 
 Generate_Body()
 Generate_Brain()
+
+
 Create_World()
