@@ -23,3 +23,6 @@ phaseOffsetBack = 0
 
 numberOfGenerations = 20
 populationSize = 20
+
+numLinks = np.random.randint(3, 20)
+sensorVec = np.random.randint(0, 2, numLinks)
