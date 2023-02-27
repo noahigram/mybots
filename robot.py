@@ -11,7 +11,8 @@ import os
 class ROBOT:
     def __init__(self, solutionID):
         self.solutionID = solutionID
-        self.robotID = p.loadURDF("body.urdf")
+
+        self.robotID = p.loadURDF("body"+str(self.solutionID)+".urdf")
         self.motors = {}
         self.linkname = ""
         self.sensors = {}
@@ -52,5 +53,9 @@ class ROBOT:
         positionOfLinkZero = stateOfLinkZero[0]
         xCoordinateOfLinkZero = positionOfLinkZero[0]
         f = open(f"tmp{solutionID}.txt", "w")
-        os.system(f"mv tmp{solutionID}.txt fitness{solutionID}.txt")
+        print(solutionID)
+
+        # Should this line be switched with the os.system call?
         f.write(str(xCoordinateOfLinkZero))
+        os.system(f"mv tmp{solutionID}.txt fitness{solutionID}.txt")
+        f.close()

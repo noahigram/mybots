@@ -21,6 +21,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Spawn()
 
         self.Mutate()
+        # ************************** Evaluate is callued here check for bug **********************
         self.Evaluate(self.children)
 
         # self.Print()
@@ -29,6 +30,8 @@ class PARALLEL_HILL_CLIMBER:
     def Evaluate(self, solutions):
         for key in solutions.keys():
             solutions[key].Start_Simulation("DIRECT")
+            # For some reason fitness*.txt is either removed or is never created before this next line
+        for key in solutions.keys():
             solutions[key].Wait_For_Simulation_To_End()
         # for key in solutions.keys():
         #     solutions[key].Wait_For_Simulation_To_End()
@@ -62,6 +65,7 @@ class PARALLEL_HILL_CLIMBER:
                 self.parents[key] = self.children[key]
 
     def Evolve(self):
+        # ************************** Evaluate is callued here check for bug **********************
         self.Evaluate(self.parents)
 
         # self.parent.Evaluate("DIRECT")
