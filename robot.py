@@ -54,3 +54,4 @@ class ROBOT:
         f = open(f"tmp{solutionID}.txt", "w")
         os.system(f"mv tmp{solutionID}.txt fitness{solutionID}.txt")
         f.write(str(xCoordinateOfLinkZero))
+        f.close()

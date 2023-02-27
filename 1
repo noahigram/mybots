@@ -1,20 +1,16 @@
 pybullet build time: Jan  3 2023 14:35:20
-Version = 4.1 Metal - 76.3
-Vendor = Apple
-Renderer = Apple M1 Pro
-b3Printf: Selected demo: Physics Server
-startThreads creating 1 threads.
-starting thread 0
-started thread 0 
-MotionThreadFunc thread started
-b3Printf: b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
-
-b3Printf: expected a world element, continuing without it.
-numActiveThreads = 0
-stopping threads
-Thread with taskId 0 exiting
-Thread TERMINATED
-destroy semaphore
-semaphore destroyed
-destroy main semaphore
-main semaphore destroyed
+b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
+expected a world element, continuing without it.Traceback (most recent call last):
+  File "/Users/noahigram/mybots/simulate.py", line 10, in <module>
+    simulation.Run()
+  File "/Users/noahigram/mybots/simulation.py", line 32, in Run
+    self.robot.Think()
+  File "/Users/noahigram/mybots/robot.py", line 47, in Think
+    self.nn.Update()
+  File "/Users/noahigram/mybots/pyrosim/neuralNetwork.py", line 35, in Update
+    self.neurons[neuronName].Update_Sensor_Neuron()
+  File "/Users/noahigram/mybots/pyrosim/neuron.py", line 72, in Update_Sensor_Neuron
+    pyrosim.Get_Touch_Sensor_Value_For_Link(self.Get_Link_Name()))
+  File "/Users/noahigram/mybots/pyrosim/pyrosim.py", line 52, in Get_Touch_Sensor_Value_For_Link
+    desiredLinkIndex = linkNamesToIndices[linkName]
+KeyError: '2'
