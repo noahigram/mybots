@@ -29,8 +29,9 @@ class PARALLEL_HILL_CLIMBER:
     def Evaluate(self, solutions):
         for key in solutions.keys():
             solutions[key].Start_Simulation("DIRECT")
-        for key in solutions.keys():
             solutions[key].Wait_For_Simulation_To_End()
+        # for key in solutions.keys():
+        #     solutions[key].Wait_For_Simulation_To_End()
 
     def Print(self):
         print("\n")
