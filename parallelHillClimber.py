@@ -23,7 +23,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Mutate()
         self.Evaluate(self.children)
 
-        self.Print()
+        # self.Print()
         self.Select()
 
     def Evaluate(self, solutions):
