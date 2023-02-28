@@ -10,12 +10,13 @@ class HILL_CLIMBER:
         self.mutations = 0
 
     def Evolve_For_One_Generation(self):
-        self.Spawn()
-        self.Mutate()
-        self.child.Evaluate("DIRECT")
-        self.Print()
-        self.Select()
-        self.mutations += 1
+        pass
+        # self.Spawn()
+        # self.Mutate()
+        # self.child.Evaluate("DIRECT")
+        # self.Print()
+        # self.Select()
+        # self.mutations += 1
 
     def Print(self):
         print("\n")
@@ -39,7 +40,7 @@ class HILL_CLIMBER:
         # (c.numberOfGenerations):
         for currentGeneration in range(c.numberOfGenerations):
             if currentGeneration == 0:
-                self.parent.Evaluate("GUI")
+                self.parent.Evaluate("DIRECT")
             self.Evolve_For_One_Generation()
 
     def Show_Best(self):

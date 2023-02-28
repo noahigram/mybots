@@ -6,7 +6,8 @@ import time
 
 
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, nextAvailableID):
+        self.myID = nextAvailableID
         # self.weights = np.random.rand(3, 2)
         # self.weights = self.weights * 2 - 1
         self.seed = np.random.randint(1, 10000)
@@ -24,14 +25,23 @@ class SOLUTION:
             self.numSensorNeurons, self.numMotorNeurons)
         self.weights = self.weights * 2 - 1
 
-    def Evaluate(self, runString):
-        os.system("python3 simulate.py " + runString)
+    def Start_Simulation(self, runString):
+        os.system("python3 simulate.py " + runString +
+                  " " + str(self.myID) + " &")
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        f = open("fitness.txt", "r")
+
+    def Wait_For_Simulation_To_End(self):
+        fitnessFileName = "fitness"+str(self.myID)+".txt"
+        while not os.path.exists(fitnessFileName):
+            time.sleep(0.01)
+
+        f = open("fitness"+str(self.myID)+".txt", "r")
         self.fitness = float(f.read())
+
         f.close()
+        os.system("rm fitness"+str(self.myID)+".txt")
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
@@ -40,7 +50,7 @@ class SOLUTION:
 
     def Create_Body(self):
 
-        pyrosim.Start_URDF("body.urdf")
+        pyrosim.Start_URDF("body"+str(self.myID)+".urdf")
 
         lastFace = 1
         random.seed(self.seed)
@@ -172,7 +182,8 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        print(self.myID)
+        pyrosim.Start_NeuralNetwork("brain"+str(self.myID)+".nndf")
         neuronsAssigned = 0
         # Assign sensor neurons first
         for link in range(0, self.numLinks-1):
@@ -205,3 +216,6 @@ class SOLUTION:
         self.weights[randomRow, randomColumn] = np.random.random() * 2 - 1
 
         # Randomly change morphology of robot
+
+    def Set_ID(self, nextAvailableID):
+        self.myID = nextAvailableID

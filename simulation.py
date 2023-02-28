@@ -8,7 +8,7 @@ import time as t
 
 
 class SIMULATION:
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
         self.directOrGUI = directOrGUI
 
         if directOrGUI == "DIRECT":
@@ -19,7 +19,7 @@ class SIMULATION:
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(c.gravX, c.gravY, c.gravZ)
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
         pyrosim.Prepare_To_Simulate(self.robot.robotID)
         self.step = 0
 

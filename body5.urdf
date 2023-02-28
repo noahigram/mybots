@@ -30,52 +30,52 @@
     </joint>
     <link name="1">
         <inertial>
-            <origin xyz="0.2416746867485019 0 0" rpy="0 0 0"/>
+            <origin xyz="0.18277327970421747 0 0" rpy="0 0 0"/>
             <mass value="1" />
             <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
         </inertial>
         <visual>
-            <origin xyz="0.2416746867485019 0 0" rpy="0 0 0"/>
+            <origin xyz="0.18277327970421747 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.4833493734970038 0.22831130310121975 0.48530882786655843" />
+                <box size="0.36554655940843495 0.3886724672879093 0.4706912294229822" />
             </geometry>
             <material name="Green">
             <color rgba = "0 1 0 1"/>
             </material>
         </visual>
         <collision>
-            <origin xyz="0.2416746867485019 0 0" rpy="0 0 0"/>
+            <origin xyz="0.18277327970421747 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.4833493734970038 0.22831130310121975 0.48530882786655843" />
+                <box size="0.36554655940843495 0.3886724672879093 0.4706912294229822" />
             </geometry>
         </collision>
     </link>
     <joint name="1_2" type="revolute">
        <parent link="1"/>
        <child  link="2"/>
-       <origin rpy="0 0 0" xyz="0.04167468674850189 -0.11415565155060987 0" />
+       <origin rpy="0 0 0" xyz="0.16554655940843493 0 0.0" />
        <axis xyz="1 0 0"/>
        <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>
     </joint>
     <link name="2">
         <inertial>
-            <origin xyz="0 -0.20374024881175595 0" rpy="0 0 0"/>
+            <origin xyz="0.12858887529485571 0 0" rpy="0 0 0"/>
             <mass value="1" />
             <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
         </inertial>
         <visual>
-            <origin xyz="0 -0.20374024881175595 0" rpy="0 0 0"/>
+            <origin xyz="0.12858887529485571 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.2438676434110133 0.4074804976235119 0.5631259019151963" />
+                <box size="0.25717775058971143 0.4356887417502669 0.4974867009407369" />
             </geometry>
-            <material name="Blue">
-            <color rgba = "0 0 1 1"/>
+            <material name="Green">
+            <color rgba = "0 1 0 1"/>
             </material>
         </visual>
         <collision>
-            <origin xyz="0 -0.20374024881175595 0" rpy="0 0 0"/>
+            <origin xyz="0.12858887529485571 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.2438676434110133 0.4074804976235119 0.5631259019151963" />
+                <box size="0.25717775058971143 0.4356887417502669 0.4974867009407369" />
             </geometry>
         </collision>
     </link>
