@@ -7,6 +7,7 @@ import random
 class HILL_CLIMBER:
     def __init__(self):
         self.parent = SOLUTION()
+        self.mutations = 0
 
     def Evolve_For_One_Generation(self):
         self.Spawn()
@@ -14,6 +15,7 @@ class HILL_CLIMBER:
         self.child.Evaluate("DIRECT")
         self.Print()
         self.Select()
+        self.mutations += 1
 
     def Print(self):
         print("\n")
@@ -23,7 +25,7 @@ class HILL_CLIMBER:
         self.child = copy.deepcopy(self.parent)
 
     def Mutate(self):
-        self.child.Mutate()
+        self.child.Mutate(self.mutations)
         # print(self.parent.weights)
         # print(self.child.weights)
 

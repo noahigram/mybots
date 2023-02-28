@@ -1,6 +1,6 @@
 import numpy as np
 
-simLength = 200
+simLength = 1000
 sleepInt = 1/60
 
 # Simulation Gravity
