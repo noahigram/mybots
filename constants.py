@@ -21,5 +21,5 @@ amplitudeBack = np.pi/4
 frequencyBack = 40
 phaseOffsetBack = 0
 
-numberOfGenerations = 100
+numberOfGenerations = 20
 populationSize = 3
