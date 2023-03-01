@@ -25,3 +25,5 @@ Our goal for evolving the morphology of the robots across generations was to add
 ### Brain Evolution
 
 As each new child is created in the simulation, the synaptic weight of one of its neurons is randomly changed. This affects the fitness of the robot and will eventually decide whether it lives or dies.
+
+<img width="973" alt="Screen Shot 2023-02-28 at 8 38 56 PM" src="https://user-images.githubusercontent.com/75544386/222031768-7ce43c31-dde6-49ab-91ad-49a3081c25ef.png">
