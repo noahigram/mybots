@@ -20,6 +20,9 @@ class SOLUTION:
         # 0 if no sensor, 1 if sensor
         self.sensorVec = np.random.randint(0, 2, self.numLinks)
         self.numSensorNeurons = sum(self.sensorVec)
+        if self.numSensorNeurons == 0:
+            self.sensorVec[0] = 1
+            self.numSensorNeurons = 1
         self.numMotorNeurons = self.numLinks-1
         self.weights = np.random.rand(
             self.numSensorNeurons, self.numMotorNeurons)
@@ -36,15 +39,24 @@ class SOLUTION:
         fitnessFileName = "fitness"+str(self.myID)+".txt"
         while not os.path.exists(fitnessFileName):
             time.sleep(0.01)
+        # print(self.myID)
 
-        f = open("fitness"+str(self.myID)+".txt", "r")
-        while f.read() == "":
-            time.sleep(0.01)
-            f = open("fitness"+str(self.myID)+".txt", "r")
+        # f = open("fitness"+str(self.myID)+".txt", "r")
+        # print(f.read() + "TEST")
 
-        self.fitness = float(f.read())
+        # self.fitness = float(f.read())
 
-        f.close()
+        # f.close()
+        while True:
+            f = open(fitnessFileName, "r")
+            content = f.read()
+            if content != "":
+                self.fitness = float(content)
+                f.close()
+                break
+            else:
+                f.close()
+
         os.system("rm fitness"+str(self.myID)+".txt")
 
     def Create_World(self):
@@ -115,7 +127,7 @@ class SOLUTION:
                     # Generate next link's size
                     lastLinkSize = linkSizes[link-1]
                     linkSizes.append([random.uniform(0.2, 0.3), random.uniform(
-                        0.4, 0.5), random.uniform(0.4, 0.7)])
+                        0.4, 0.5), random.uniform(0.2, 0.3)])
                     currentLinkSize = linkSizes[link]
 
                     # Choose joint position as a random face of the last link
@@ -186,7 +198,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        print(self.myID)
+
         pyrosim.Start_NeuralNetwork("brain"+str(self.myID)+".nndf")
         neuronsAssigned = 0
         # Assign sensor neurons first
@@ -214,8 +226,9 @@ class SOLUTION:
         np.random.seed(mutations)
 
         # Randomly update a synapse weight
-        randomRow = np.random.randint(0, self.numSensorNeurons-1)
-        randomColumn = np.random.randint(0, self.numMotorNeurons-1)
+
+        randomRow = np.random.randint(0, self.numSensorNeurons)
+        randomColumn = np.random.randint(0, self.numMotorNeurons)
 
         self.weights[randomRow, randomColumn] = np.random.random() * 2 - 1
 

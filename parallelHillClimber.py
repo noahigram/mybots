@@ -9,13 +9,13 @@ class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         os.system("rm brain*.nndf")
         os.system("rm fitness*.nndf")
+        os.system("rm body*.urdf")
         self.nextAvailableID = 0
         self.parents = {}
         for i in range(0, c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
-        print(self.parents)
         self.mutations = 0
 
         # self.parent = SOLUTION()
@@ -26,7 +26,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Mutate()
         self.Evaluate(self.children)
 
-        # self.Print()
+        self.Print()
         self.Select()
         self.mutations += 1
 
@@ -52,6 +52,7 @@ class PARALLEL_HILL_CLIMBER:
         # print(self.child.weights)
 
     def Select(self):
+
         for key in self.children.keys():
             if self.parents[key].fitness < self.children[key].fitness:
                 self.parents[key] = self.children[key]
@@ -75,9 +76,10 @@ class PARALLEL_HILL_CLIMBER:
             solutions[parent].Wait_For_Simulation_To_End()
 
     def Show_Best(self):
+
         bestParent = self.parents[0]
         for parent in self.parents.keys():
-            if self.parents[parent].fitness < bestParent.fitness:
+            if self.parents[parent].fitness > bestParent.fitness:
                 bestParent = self.parents[parent]
 
         bestParent.Start_Simulation("GUI")
