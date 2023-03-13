@@ -14,6 +14,8 @@ The main goal of this project was to evolve a population of robots to be able to
 
 By the end of these iterations, the final population of robots should have significantly better locomotion skills than the earlier generations.
 
+We have included information on the code used for this project. There is also a video summarizing results at the end of this ReadMe file, as well as diagrams which outline how bodies and brains are generated and evolved. 
+
 ## Instructions for using this code
 
 To simulate the evolution of a population of robots, run search.py. Doing this will run the parallel hill climber code once with the specified number of generations and population size defined in constants.py. For safest use, use a population size of at most 10 and a number of generations of at most 400. If search.py stops running, it is likely due to a memory error. This should not happen, but if it does, please rerun search.py with a new number of generations and population size by reducing them in constants.py.
