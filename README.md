@@ -38,6 +38,13 @@ The Generate_Body() method creates a robot body with a random number of randomly
 
 The Generate_Brain() method creates a neural network with a corresponding nndf file. It first assigns a motor neuron to each joint, and then randomly assigns sensor neurons to some of the joints. Lastly, it connects each sensor neuron to each motor neuron with a random synaptic weight using pyrosim's Send_Synapse function.
 
+## Parallel Hillclimber Implementation
+The script parallelhillclimber.py contains the parallelhillclimber class which is instantiated at the beginning of search.py. Its purpose is to do the following at each generation:
+1. Spawn a new population of children from the parent population. This is done in the Spawn() method. 
+2. Mutate the children to randomly alter its brain. This is done in the Mutate() method. 
+3. Run a simulation for each child, and record its fitness. This is done with the Start_Simulation() method. 
+4. Compare the child's fitness to its parents. If it has a better fitness, it replaces its parent. This is done in the Evaluate() method.
+
 ## Body and Brain Evolution
 
 ### Body Evolution
@@ -57,3 +64,7 @@ Below are some sample brains that could be generated for a new member of the pop
 Our main takeaway from this project is that random evolution is definitely a viable way for a population to evolve over time, if given enough time. We found that although a new randomly generated body always has the potential to travel well, the best way of ensuring that at least a subset of the population performs well is to evolve the population for a very large number of generations. The random variations in the brains and bodies at each iteration of the hillclimber are relatively small changes, so running for a large number of generations helps to ensure compounding of these small changes towards a better moving robot. 
 
 We also found that the robots that evolved to move swiftly exhibited movement strategies that are somewhat oscillatory. These robots rely on the patterns of movement that lead them forward the most, and so often an evolved robot would repeat the same movement of its limbs to generate a repetitive move forward.
+
+## Summary Video
+The video file was too big to embed in this readme, so a link is attached. 
+https://youtu.be/4_p1T98Kjws
