@@ -52,3 +52,8 @@ As each new child is created in the simulation, the synaptic weight of one of it
 
 Below are some sample brains that could be generated for a new member of the population.
 ![IMG_0334](https://user-images.githubusercontent.com/75544386/224839153-5b815a1e-2f38-485f-ab2c-000c5321303b.jpg)
+
+## Summary of Results
+Our main takeaway from this project is that random evolution is definitely a viable way for a population to evolve over time, if given enough time. We found that although a new randomly generated body always has the potential to travel well, the best way of ensuring that at least a subset of the population performs well is to evolve the population for a very large number of generations. The random variations in the brains and bodies at each iteration of the hillclimber are relatively small changes, so running for a large number of generations helps to ensure compounding of these small changes towards a better moving robot. 
+
+We also found that the robots that evolved to move swiftly exhibited movement strategies that are somewhat oscillatory. These robots rely on the patterns of movement that lead them forward the most, and so often an evolved robot would repeat the same movement of its limbs to generate a repetitive move forward.
