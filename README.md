@@ -7,7 +7,7 @@ This repo contains the code used for the artificial life final project. The goal
 ## Overview of this project
 The main goal of this project was to evolve a population of robots to be able to move somewhat swiftly and quickly through their worlds. The parallel hill climber implements this in the following way:
 1. An initial population of random robots is created - this is the first group of parents.
-2. The fitness of each parent is measured
+2. The fitness of each parent is measured as its distance travelled in the x direction.
 3. A new child is spawned from each parent with a new brain and body
 4. The fitness of each child is measured. If its fitness exceeds its parents fitness, it replaces the parent in the current generation.
 5. This is repeated for the number of generations specified in constants.py.
