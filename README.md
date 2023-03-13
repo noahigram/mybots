@@ -49,7 +49,8 @@ The script parallelhillclimber.py contains the parallelhillclimber class which i
 
 ### Body Evolution
 
-Our goal for evolving the morphology of the robots across generations was to add a link to the robot at each generation. I had a lot of trouble implementing this process because I worked off of my parallel hill climber code from assignment 4, which only used a single urdf file. I was able to at least generate a new random robot at each step, but I ran into problems trying to make the robot evolve from its parent. Below is a diagram of the body generation.![Random3DBody](https://user-images.githubusercontent.com/75544386/220231503-1c5ac866-97dd-407c-8d4e-9a28791b0224.jpg)
+Our goal for evolving the morphology of the robots across generations was to add a link to the robot at each generation. I had a lot of trouble implementing this process because I worked off of my parallel hill climber code from assignment 4, which only used a single urdf file. I was able to at least generate a new random robot at each step, but I ran into problems trying to make the robot evolve from its parent. Below is a diagram of the body generation as well as a diagram showing how phenotype comes from genotype.![Random3DBody](https://user-images.githubusercontent.com/75544386/220231503-1c5ac866-97dd-407c-8d4e-9a28791b0224.jpg)
+![IMG_0335](https://user-images.githubusercontent.com/75544386/224856574-33b71b55-6df9-4e09-950e-d1d2cca42e66.jpg)
 
 ### Brain Evolution
 
@@ -67,4 +68,5 @@ We also found that the robots that evolved to move swiftly exhibited movement st
 
 ## Summary Video
 The video file was too big to embed in this readme, so a link is attached. 
+
 https://youtu.be/4_p1T98Kjws
