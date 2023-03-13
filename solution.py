@@ -11,6 +11,7 @@ class SOLUTION:
         # self.weights = np.random.rand(3, 2)
         # self.weights = self.weights * 2 - 1
         self.seed = np.random.randint(1, 10000)
+        print(self.seed)
         np.random.seed(self.seed)
         self.mutations = 0
 
@@ -38,7 +39,7 @@ class SOLUTION:
     def Wait_For_Simulation_To_End(self):
         fitnessFileName = "fitness"+str(self.myID)+".txt"
         while not os.path.exists(fitnessFileName):
-            time.sleep(0.01)
+            time.sleep(0.3)
         # print(self.myID)
 
         # f = open("fitness"+str(self.myID)+".txt", "r")
@@ -65,7 +66,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Body(self):
-
+        # Start Urdf file and delete last one
         pyrosim.Start_URDF("body"+str(self.myID)+".urdf")
 
         lastFace = 1
@@ -200,6 +201,7 @@ class SOLUTION:
     def Create_Brain(self):
 
         pyrosim.Start_NeuralNetwork("brain"+str(self.myID)+".nndf")
+
         neuronsAssigned = 0
         # Assign sensor neurons first
         for link in range(0, self.numLinks-1):

@@ -3,6 +3,7 @@ import constants as c
 import copy
 import random
 import os
+import numpy as np
 
 
 class PARALLEL_HILL_CLIMBER:
@@ -16,6 +17,8 @@ class PARALLEL_HILL_CLIMBER:
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
+        self.bestParentFitnesses = np.zeros(c.numberOfGenerations)
+        self.currentGen = 0
         self.mutations = 0
 
         # self.parent = SOLUTION()
@@ -25,10 +28,21 @@ class PARALLEL_HILL_CLIMBER:
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
+        self.Get_Best_Fitness()
+        self.currentGen += 1
 
-        self.Print()
+        # self.Print()
         self.Select()
         self.mutations += 1
+
+    def Get_Best_Fitness(self):
+        bestParentFitness = self.parents[0].fitness
+        for parent in self.parents.keys():
+
+            if self.parents[parent].fitness > bestParentFitness:
+                bestParentFitness = self.parents[parent].fitness
+
+        self.bestParentFitnesses[self.currentGen] = bestParentFitness
 
     def Print(self):
         print("\n")
@@ -78,9 +92,14 @@ class PARALLEL_HILL_CLIMBER:
     def Show_Best(self):
 
         bestParent = self.parents[0]
+        worstParent = bestParent
         for parent in self.parents.keys():
             if self.parents[parent].fitness > bestParent.fitness:
                 bestParent = self.parents[parent]
-
+            if self.parents[parent].fitness < worstParent.fitness:
+                worstParent = self.parents[parent]
+        # Show best and worst parent
+        worstParent.Start_Simulation("GUI")
         bestParent.Start_Simulation("GUI")
+
         # self.parent.Evaluate("GUI")

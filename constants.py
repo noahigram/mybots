@@ -6,20 +6,20 @@ sleepInt = 1/60
 # Simulation Gravity
 gravX = 0
 gravY = 0
-gravZ = -9.8
+gravZ = -100
 
 # Front and back leg motor forces
-backLegForce = 200
+backLegForce = 500
 frontLegForce = 30
 
 
 # Amplitude, frequency, phase offset
-amplitudeFront = np.pi/3
+amplitudeFront = np.pi
 frequencyFront = 100
 phaseOffsetFront = np.pi/3
 amplitudeBack = np.pi/4
 frequencyBack = 40
 phaseOffsetBack = 0
 
-numberOfGenerations = 10
-populationSize = 2
+numberOfGenerations = 500
+populationSize = 10

@@ -1,8 +1,18 @@
-# Ludobots Assignment 8
+# Ludobots Final Project
 
 By Noah Igram
 
-This repo contains the code used for assignment 8. The goal of this assignment was to implement a parallel hill climber which evolves a random body throughout the generations. The most important parts of the code for this project are summarized below. Starter code for this gitHub repo was provided by the Ludobots MOOC on reddit. This MOOC can be found in the r/ludobots subreddit of Reddit.com.
+This repo contains the code used for the artificial life final project. The goal of this project was to implement a parallel hill climber which evolves a random body throughout the generations. The most important parts of the code for this project are summarized below. Starter code for this gitHub repo was provided by the Ludobots MOOC on reddit. This MOOC can be found in the r/ludobots subreddit of Reddit.com.
+
+## Instructions for using this code
+
+To simulate the evolution of a population of robots, run search.py. Doing this will run the parallel hill climber code once with the specified number of generations and population size defined in constants.py. For safest use, use a population size of at most 10 and a number of generations of at most 400.
+
+Once search.py has finished, it will prompt the user to press enter to continue. This will trigger the best and worst simulations to run side by side in two separate windows. The reason for including this stopping point is so that if a large number of generations is used, one can walk away and not worry about missing the final simulation.
+
+A plot will also appear which shows the fitness of the best parent at each generation.
+
+## Body and Brain Generation
 
 ## Solution.py
 
