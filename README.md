@@ -4,9 +4,19 @@ By Noah Igram
 
 This repo contains the code used for the artificial life final project. The goal of this project was to implement a parallel hill climber which evolves a random body throughout the generations. The most important parts of the code for this project are summarized below. Starter code for this gitHub repo was provided by the Ludobots MOOC on reddit. This MOOC can be found in the r/ludobots subreddit of Reddit.com.
 
+## Overview of this project
+The main goal of this project was to evolve a population of robots to be able to move somewhat swiftly and quickly through their worlds. The parallel hill climber implements this in the following way:
+1. An initial population of random robots is created - this is the first group of parents.
+2. The fitness of each parent is measured
+3. A new child is spawned from each parent with a new brain and body
+4. The fitness of each child is measured. If its fitness exceeds its parents fitness, it replaces the parent in the current generation.
+5. This is repeated for the number of generations specified in constants.py.
+
+By the end of these iterations, the final population of robots should have significantly better locomotion skills than the earlier generations.
+
 ## Instructions for using this code
 
-To simulate the evolution of a population of robots, run search.py. Doing this will run the parallel hill climber code once with the specified number of generations and population size defined in constants.py. For safest use, use a population size of at most 10 and a number of generations of at most 400.
+To simulate the evolution of a population of robots, run search.py. Doing this will run the parallel hill climber code once with the specified number of generations and population size defined in constants.py. For safest use, use a population size of at most 10 and a number of generations of at most 400. If search.py stops running, it is likely due to a memory error. This should not happen, but if it does, please rerun search.py with a new number of generations and population size by reducing them in constants.py.
 
 Once search.py has finished, it will prompt the user to press enter to continue. This will trigger the best and worst simulations to run side by side in two separate windows. The reason for including this stopping point is so that if a large number of generations is used, one can walk away and not worry about missing the final simulation.
 
