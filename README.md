@@ -42,8 +42,11 @@ The Generate_Brain() method creates a neural network with a corresponding nndf f
 The script parallelhillclimber.py contains the parallelhillclimber class which is instantiated at the beginning of search.py. Its purpose is to do the following at each generation:
 1. Spawn a new population of children from the parent population. This is done in the Spawn() method. Diagrams showing the possible children brains and bodies can be found below in the body and brain evolution sections.
 2. Mutate the children to randomly alter its brain. This is done in the Mutate() method. 
-3. Run a simulation for each child, and record its fitness. This is done with the Start_Simulation() method. 
-4. Compare the child's fitness to its parents. If it has a better fitness, it replaces its parent. This is done in the Evaluate() method.
+3. Run a simulation for each child, and record its fitness. This is done with the Evaluate() method. 
+4. Compare the child's fitness to its parents. If it has a better fitness, it replaces its parent. This is done in the Select() method.
+
+Below is a diagram summarizing this process.
+![IMG_0338](https://user-images.githubusercontent.com/75544386/224860153-714a1e32-be2e-43a5-8f67-f736bba2c96e.jpg)
 
 ## Body and Brain Evolution
 
@@ -70,3 +73,4 @@ We also found that the robots that evolved to move swiftly exhibited movement st
 The video file was too big to embed in this readme, so a link is attached. 
 
 https://youtu.be/4_p1T98Kjws
+
