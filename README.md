@@ -14,7 +14,7 @@ The main goal of this project was to evolve a population of robots to be able to
 2. The fitness of each parent is measured as its distance travelled in the x direction.
 3. A new child is spawned from each parent with a new brain and body
 4. The fitness of each child is measured. If a child's fitness exceeds its parents fitness, it replaces the parent in the current generation.
-5. This is repeated for the number of generations specified in constants.py.
+5. Steps 3-5 are repeated for the number of generations specified in constants.py.
 
 By the end of these iterations, the final population of robots should have significantly better locomotion skills than the earlier generations.
 
