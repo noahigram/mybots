@@ -3,6 +3,7 @@
 By Noah Igram
 
 This repo contains the code used for the artificial life final project. The goal of this project was to implement a parallel hill climber which evolves a random body throughout the generations. The most important parts of the code for this project are summarized below. Starter code for this gitHub repo was provided by the Ludobots MOOC on reddit. This MOOC can be found in the r/ludobots subreddit of Reddit.com.
+Here's a link to the Ludobots subreddit: https://www.reddit.com/r/ludobots/
 
 # Teaser Gif
 Here is a teaser gif which very quickly summarizes our progress from random to evolved creatures. 
