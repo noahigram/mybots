@@ -4,6 +4,10 @@ By Noah Igram
 
 This repo contains the code used for the artificial life final project. The goal of this project was to implement a parallel hill climber which evolves a random body throughout the generations. The most important parts of the code for this project are summarized below. Starter code for this gitHub repo was provided by the Ludobots MOOC on reddit. This MOOC can be found in the r/ludobots subreddit of Reddit.com.
 
+# Teaser Gif
+Here is a teaser gif which very quickly summarizes our progress from random to evolved creatures. 
+![TeaserGifFinal](https://user-images.githubusercontent.com/75544386/224864647-1069ffc0-7dbc-4c91-bbea-d10c2527e1ba.gif)
+
 ## Overview of this project
 The main goal of this project was to evolve a population of robots to be able to move somewhat swiftly and quickly through their worlds. The parallel hill climber implements this in the following way:
 1. An initial population of random robots is created - this is the first group of parents.
@@ -75,4 +79,5 @@ These robots could surely be improved. As we learned above, our best results com
 The video file was too big to embed in this readme, so a link is attached. 
 
 https://youtu.be/4_p1T98Kjws
+
 
