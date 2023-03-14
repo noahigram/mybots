@@ -69,6 +69,8 @@ Our main takeaway from this project is that random evolution is definitely a via
 
 We also found that the robots that evolved to move swiftly exhibited movement strategies that are somewhat oscillatory. These robots rely on the patterns of movement that lead them forward the most, and so often an evolved robot would repeat the same movement of its limbs to generate a repetitive move forward.
 
+These robots could surely be improved. As we learned above, our best results come from runs with a large number of generations and a large population size. To arrive at better results we could run our simulation for longer or for a greater population, but we were held back by our limitations in computational power/computer memory. There are definitely ways we could speed up our code which could allow us to do this. Additionally, techniques for modifying the brains and bodies at each generation could also be improved. The changes between robots at each generation are very random. In pursuing any sort of hypothesis or goal for our robots, we can always use inspiration from what we expect, which could help us make less arbitrary changes at each generation. 
+
 ## Summary Video
 The video file was too big to embed in this readme, so a link is attached. 
 
